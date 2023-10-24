@@ -2,6 +2,8 @@ package input;
 
 import model.Command;
 
+import java.util.Optional;
+
 public interface InputHandler {
-    public Command readCommand();
+     Optional<Command> readCommand();
 }

@@ -4,8 +4,8 @@ import model.CurrencyRate;
 
 import java.util.List;
 
-import static model.Constant.dateFormat;
-import static model.Constant.decimalFormat;
+import static constants.Constant.dateFormat;
+import static constants.Constant.decimalFormat;
 
 public class ConsoleOutputFormatter implements OutputFormatter {
 

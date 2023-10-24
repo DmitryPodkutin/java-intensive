@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 
-public class CurrencyRateArithmeticMeanAlgorithm implements CurrencyRateCalculationAlgorithm {
+public class Average implements CurrencyRateCalculationAlgorithm {
     public static final double ZERO_RESULT = 0.0;
 
     @Override

@@ -1,17 +1,12 @@
 package model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum CurrencyName {
-    EUR("EUR"),
-    USD("USD"),
-    TRY("TRY");
-
-    private final String currencyName;
-
-    CurrencyName(String currencyName) {
-        this.currencyName = currencyName;
-    }
-
-    public String getCurrencyName() {
-        return currencyName;
-    }
+    EUR,
+    USD,
+    TRY;
 }

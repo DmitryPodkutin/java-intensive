@@ -1,11 +1,9 @@
 package forecasting;
 
-import data.CurrencyCsvDataParser;
-import forecasting.forecastingAlgorithm.CurrencyRateArithmeticMeanAlgorithm;
+import forecasting.forecastingAlgorithm.Average;
 import forecasting.forecastingAlgorithm.CurrencyRateCalculationAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import model.CurrencyRate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -13,29 +11,26 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
 import java.util.stream.Collectors;
 
+@Slf4j
 public class CurrencyExchangeForecasterImpl implements CurrencyExchangeForecaster {
     private final CurrencyRateCalculationAlgorithm currencyRateCalculationAlgorithm =
-            new CurrencyRateArithmeticMeanAlgorithm();
-    private static final Logger logger = LoggerFactory.getLogger(CurrencyExchangeForecasterImpl.class);
+            new Average();
 
 
     @Override
     public List<CurrencyRate> getExchangeRateForTomorrow(List<CurrencyRate> currencyRates) {
         try {
             BigDecimal curs = currencyRateCalculationAlgorithm.calculateAverageExchangeRateForLastSevenDays(currencyRates);
-            logger.debug("Рассчитан средний курс за последние семь дней: {}", curs);
+            log.debug("Рассчитан средний курс за последние семь дней: {}", curs);
             return currencyRates.stream()
                     .limit(1)
-                    .map(currencyRate -> CurrencyRate.builder()
-                            .nominal(currencyRate.getNominal())
-                            .date(getNextDate(new Date(), 1))
-                            .curs(curs)
-                            .cdx(currencyRate.getCdx()).build()).collect(Collectors.toList());
+                    .map(currencyRate -> new CurrencyRate(currencyRate.getNominal(),
+                            getNextDate(new Date(), 1), curs, currencyRate.getCdx()))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
-            logger.error("Произошла ошибка при расчете курса на завтра", e);
+            log.error("Произошла ошибка при расчете курса на завтра", e);
         }
         return List.of();
     }
@@ -51,16 +46,16 @@ public class CurrencyExchangeForecasterImpl implements CurrencyExchangeForecaste
             final Date startDate = result.get(result.size() - 1).getDate();
             final int daysBetween = getDaysBetween(startDate, endDate);
             for (int i = 0; i < daysBetween; i++) {
-                CurrencyRate currencyRate = result.get(result.size() - 1);
+                final CurrencyRate currencyRate = result.get(result.size() - 1);
                 result.add(new CurrencyRate(0,
                         getNextDate(currencyRate.getDate(), 1),
                         currencyRateCalculationAlgorithm.calculateAverageExchangeRateForLastSevenDays(result),
                         currencyRate.getCdx()));
             }
-            logger.debug("Прогноз на следующую неделю успешно сформирован");
+            log.debug("Прогноз на следующую неделю успешно сформирован");
             return result;
         } catch (Exception e) {
-            logger.error("Произошла ошибка при формировании прогноза на следующую неделю", e);
+            log.error("Произошла ошибка при формировании прогноза на следующую неделю", e);
         }
         return List.of();
     }

@@ -1,13 +1,13 @@
 package model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
+@Getter
+@AllArgsConstructor
 public class Command {
-    private CurrencyName currencyName;
-    private DateInterval interval;
+    private final CurrencyName currencyName;
+    private final DateInterval interval;
 }
 
 

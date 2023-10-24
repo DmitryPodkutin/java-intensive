@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum DateInterval {
-    TOMORROW,
-    WEEK;
+public enum RateCommand {
+    RATE
 }

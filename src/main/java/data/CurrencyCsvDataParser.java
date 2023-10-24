@@ -3,19 +3,18 @@ package data;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import lombok.extern.slf4j.Slf4j;
 import model.CurrencyRate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.Constant.SEPARATOR;
+import static constants.Constant.SEPARATOR;
 
+@Slf4j
 public class CurrencyCsvDataParser implements CurrencyDataParser {
-    private static final Logger logger = LoggerFactory.getLogger(CurrencyCsvDataParser.class);
 
     @Override
     public List<CurrencyRate> parseData(InputStreamReader inputStreamReader) {
@@ -30,7 +29,7 @@ public class CurrencyCsvDataParser implements CurrencyDataParser {
                     .readValues(inputStreamReader);
             elements.addAll(iterator.readAll());
         } catch (IOException e) {
-            logger.error("Failed to read CSV file", e);
+            log.error("Failed to read CSV file", e);
         }
         return elements;
     }
