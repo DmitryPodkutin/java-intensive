@@ -1,7 +1,7 @@
 package forecasting;
 
-import forecasting.forecastingAlgorithm.Average;
 import forecasting.forecastingAlgorithm.CurrencyRateCalculationAlgorithm;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import model.CurrencyRate;
 
@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequiredArgsConstructor
 public class CurrencyExchangeForecasterImpl implements CurrencyExchangeForecaster {
-    private final CurrencyRateCalculationAlgorithm currencyRateCalculationAlgorithm =
-            new Average();
-
+    private final CurrencyRateCalculationAlgorithm currencyRateCalculationAlgorithm;
 
     @Override
     public List<CurrencyRate> getExchangeRateForTomorrow(List<CurrencyRate> currencyRates) {

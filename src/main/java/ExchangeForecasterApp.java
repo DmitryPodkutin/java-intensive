@@ -1,14 +1,7 @@
-import data.CurrencyCsvDataParser;
-import data.CurrencyFileDataLoader;
-import forecasting.CurrencyExchangeForecasterImpl;
 import forecasting.ExchangeForecasterCommandRouter;
-import forecasting.ExchangeForecasterConsoleCommandRouter;
-import input.ConsoleCommandValidator;
-import input.ConsoleInputHandler;
 import input.InputHandler;
 import model.Command;
 import model.CurrencyRate;
-import output.ConsoleOutputFormatter;
 import output.OutputFormatter;
 
 import java.util.List;
@@ -19,13 +12,12 @@ public class ExchangeForecasterApp {
     private final ExchangeForecasterCommandRouter forecasterCommandRouter;
     private final OutputFormatter outputFormatter;
 
-    public ExchangeForecasterApp() {
-        this.inputHandler = new ConsoleInputHandler(new ConsoleCommandValidator());
-        this.forecasterCommandRouter = new ExchangeForecasterConsoleCommandRouter(
-                new CurrencyExchangeForecasterImpl(),
-                new CurrencyFileDataLoader(new CurrencyCsvDataParser())
-        );
-        this.outputFormatter = new ConsoleOutputFormatter();
+    public ExchangeForecasterApp(InputHandler inputHandler,
+                                 ExchangeForecasterCommandRouter commandRouter,
+                                 OutputFormatter outputFormatter) {
+        this.inputHandler = inputHandler;
+        this.forecasterCommandRouter = commandRouter;
+        this.outputFormatter = outputFormatter;
     }
 
     public void run() {
