@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Command {
-    private final CurrencyName currencyName;
+    private final RateCommand rateCommand;
     private final DateInterval interval;
 }
 

@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import static constants.Constant.CURRENCY_DATA_AMD_FILE_PATH;
+import static constants.Constant.CURRENCY_DATA_BGN_FILE_PATH;
 import static constants.Constant.CURRENCY_DATA_EUR_FILE_PATH;
 import static constants.Constant.CURRENCY_DATA_TRY_FILE_PATH;
 import static constants.Constant.CURRENCY_DATA_USD_FILE_PATH;
@@ -50,6 +52,12 @@ public class CurrencyFileDataLoader implements CurrencyDataLoader {
                 break;
             case TRY:
                 filePath = CURRENCY_DATA_TRY_FILE_PATH;
+                break;
+            case BGN:
+                filePath = CURRENCY_DATA_BGN_FILE_PATH;
+                break;
+            case AMD:
+                filePath = CURRENCY_DATA_AMD_FILE_PATH;
                 break;
             default:
                 filePath = "";

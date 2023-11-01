@@ -8,5 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum CurrencyName {
     EUR,
     USD,
-    TRY;
+    TRY,
+    BGN,
+    AMD
 }

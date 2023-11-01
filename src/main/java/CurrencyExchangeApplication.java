@@ -4,15 +4,14 @@ import data.CurrencyDataParser;
 import data.CurrencyFileDataLoader;
 import forecasting.CurrencyExchangeForecaster;
 import forecasting.CurrencyExchangeForecasterImpl;
-import forecasting.ExchangeForecasterCommandRouter;
-import forecasting.ExchangeForecasterConsoleCommandRouter;
-import forecasting.forecastingAlgorithm.Average;
+import forecasting.ExchangeConsoleForecasterCommandRouter;
+import forecasting.ExchangeConsoleForecasterCommandRouterImpl;
 import input.CommandValidator;
 import input.ConsoleCommandValidator;
+import input.ConsoleConsoleInputHandlerImpl;
 import input.ConsoleInputHandler;
-import input.InputHandler;
+import output.ConsoleConsoleOutputFormatterImpl;
 import output.ConsoleOutputFormatter;
-import output.OutputFormatter;
 
 public class CurrencyExchangeApplication {
     public static void main(String[] args) {
@@ -24,12 +23,12 @@ public class CurrencyExchangeApplication {
         return new ExchangeForecasterApp(getInputHandler(), getCommandRouter(), getOutputFormatter());
     }
 
-    private static OutputFormatter getOutputFormatter() {
-        return new ConsoleOutputFormatter();
+    private static ConsoleOutputFormatter getOutputFormatter() {
+        return new ConsoleConsoleOutputFormatterImpl();
     }
 
-    private static ExchangeForecasterCommandRouter getCommandRouter() {
-        return new ExchangeForecasterConsoleCommandRouter(getExchangeForecaster(), getDataLoader());
+    private static ExchangeConsoleForecasterCommandRouter getCommandRouter() {
+        return new ExchangeConsoleForecasterCommandRouterImpl(getExchangeForecaster(), getDataLoader());
     }
 
     private static CurrencyDataLoader getDataLoader() {
@@ -41,11 +40,11 @@ public class CurrencyExchangeApplication {
     }
 
     private static CurrencyExchangeForecaster getExchangeForecaster() {
-        return new CurrencyExchangeForecasterImpl(new Average());
+        return new CurrencyExchangeForecasterImpl();
     }
 
-    private static InputHandler getInputHandler() {
-        return new ConsoleInputHandler(getCommandValidator());
+    private static ConsoleInputHandler getInputHandler() {
+        return new ConsoleConsoleInputHandlerImpl(getCommandValidator());
     }
 
     private static CommandValidator getCommandValidator() {
