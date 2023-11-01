@@ -1,30 +1,26 @@
-import forecasting.ExchangeForecasterCommandRouter;
-import input.InputHandler;
-import model.Command;
+import forecasting.ExchangeConsoleForecasterCommandRouter;
+import input.ConsoleInputHandler;
+import integration.telegrambot.BotInitializer;
+import lombok.RequiredArgsConstructor;
+import model.ConsoleCommand;
 import model.CurrencyRate;
-import output.OutputFormatter;
+import output.ConsoleOutputFormatter;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class ExchangeForecasterApp {
-    private final InputHandler inputHandler;
-    private final ExchangeForecasterCommandRouter forecasterCommandRouter;
-    private final OutputFormatter outputFormatter;
-
-    public ExchangeForecasterApp(InputHandler inputHandler,
-                                 ExchangeForecasterCommandRouter commandRouter,
-                                 OutputFormatter outputFormatter) {
-        this.inputHandler = inputHandler;
-        this.forecasterCommandRouter = commandRouter;
-        this.outputFormatter = outputFormatter;
-    }
+    private final ConsoleInputHandler consoleInputHandler;
+    private final ExchangeConsoleForecasterCommandRouter forecasterCommandRouter;
+    private final ConsoleOutputFormatter consoleOutputFormatter;
 
     public void run() {
-        final Optional<Command> command = inputHandler.readCommand();
+        final Optional<ConsoleCommand> command = consoleInputHandler.readCommand();
         command.ifPresent(com -> {
             final List<CurrencyRate> currencyRates = forecasterCommandRouter.route(com);
-            outputFormatter.displayExchangeRate(currencyRates);
+            consoleOutputFormatter.displayExchangeRate(currencyRates);
         });
+        BotInitializer.initializeBot();
     }
 }

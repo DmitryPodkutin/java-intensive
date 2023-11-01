@@ -14,6 +14,11 @@
         <lombok.version>1.18.28</lombok.version>
         <jackson-dataformat-csv.version>2.15.2</jackson-dataformat-csv.version>
         <slf4j.version>2.0.7</slf4j.version>
+        <telegram.version>6.5.0</telegram.version>
+        <apache-commons.version>2.8.0</apache-commons.version>
+        <jfreechart.version>1.5.4</jfreechart.version>
+        <junit.version>4.13.2</junit.version>
+        <junit-jupiter.version>5.9.2</junit-jupiter.version>
     </properties>
 
     <dependencies>
@@ -30,9 +35,46 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-          </dependency>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>${telegram.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-configuration2</artifactId>
+            <version>${apache-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>${jfreechart.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
